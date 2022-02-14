@@ -2,13 +2,13 @@
 #include <cstdlib>
 #include <thread>
 
-void threadFunction() {
-    printf("Thread Function\n");
+void threadFunction(int i) {
+    printf("Thread Function\n%d", i);
 }
 
 int main()
 {
-    std::thread t(threadFunction);
+    std::thread t(threadFunction, 10);
     t.join();
     // t.detach();
 
