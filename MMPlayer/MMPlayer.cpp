@@ -1,9 +1,18 @@
-#include "MMPlayer.h"
-#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <thread>
 
-using namespace std;
+void threadFunction() {
+    printf("Thread Function\n");
+}
 
-int main() {
-    cout << "helo" << endl;
-    return 0;
+int main()
+{
+    std::thread t(threadFunction);
+    t.join();
+    // t.detach();
+
+    // t.joinable();
+
+    return EXIT_SUCCESS;
 }
