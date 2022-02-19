@@ -1,3 +1,5 @@
+#include "MMThread/MMThread.h"
+#include <chrono>
 #include <thread>
 
 void threadFunction(int i) { printf("Thread Function\n%d", i); }
@@ -8,7 +10,7 @@ void threadFun(int ThreadIndex) {
   }
 }
 
-int main() {
+int main2() {
   // std::thread t(threadFunction, 10);
   // t.join();
   // t.detach();
@@ -20,5 +22,23 @@ int main() {
 
   t1.join();
   t2.join();
+  return EXIT_SUCCESS;
+}
+
+class MyMMThread : public MMThread {
+private:
+  int a = 0;
+
+public:
+  MyMMThread(int _a) { a = _a; }
+
+  void run() { printf("MyMMThread %d\n", a); }
+};
+
+int main() {
+  MyMMThread t(10);
+  t.Start();
+
+  std::this_thread::sleep_for(std::chrono::seconds(2));
   return EXIT_SUCCESS;
 }
